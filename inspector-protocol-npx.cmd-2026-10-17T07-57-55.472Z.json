@@ -1,0 +1,399 @@
+[
+  {
+    "id": "57ee25a3-2355-4f4c-a9bd-c5270eb2c213",
+    "timestamp": "2026-10-17T07:55:16.076Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "sampling": {},
+          "elicitation": {
+            "form": {},
+            "url": {}
+          },
+          "roots": {
+            "listChanged": true
+          },
+          "tasks": {
+            "list": {},
+            "cancel": {},
+            "requests": {
+              "sampling": {
+                "createMessage": {}
+              },
+              "elicitation": {
+                "create": {}
+              }
+            }
+          },
+          "extensions": {
+            "io.modelcontextprotocol/tasks": {},
+            "io.modelcontextprotocol/ui": {
+              "mimeTypes": [
+                "text/html;profile=mcp-app"
+              ],
+              "elicitation": {}
+            },
+            "io.modelcontextprotocol/skills": {}
+          }
+        },
+        "clientInfo": {
+          "name": "mcp-inspector",
+          "version": "2.11.0"
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 0
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 0,
+      "result": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "tools": {
+            "listChanged": true
+          }
+        },
+        "serverInfo": {
+          "name": "file-server",
+          "version": "1.0.0"
+        }
+      }
+    },
+    "duration": 1251
+  },
+  {
+    "id": "b5b1272c-9dac-4fb6-abb0-4f61e306a754",
+    "timestamp": "2026-10-17T07:55:17.335Z",
+    "direction": "notification",
+    "origin": "client",
+    "message": {
+      "jsonrpc": "2.0",
+      "method": "notifications/initialized"
+    }
+  },
+  {
+    "id": "22f63700-d636-4be3-99ae-230d8dc125b5",
+    "timestamp": "2026-10-17T07:55:17.367Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/list",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "params": {
+        "_meta": {
+          "progressToken": 1
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "tools": [
+          {
+            "name": "list_directory",
+            "description": "List files and folders inside the sandbox",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "path": {
+                  "default": ".",
+                  "type": "string"
+                }
+              }
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "read_file",
+            "description": "Read a text file inside the sandbox",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "write_file",
+            "description": "Write text to a file inside the sandbox (makes it if missing)",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "content": {
+                  "type": "string",
+                  "maxLength": 1000000
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "search_files",
+            "description": "Find files by name, or by text inside them",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "mode": {
+                  "default": "name",
+                  "type": "string",
+                  "enum": [
+                    "name",
+                    "content"
+                  ]
+                },
+                "directory": {
+                  "default": ".",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "query"
+              ]
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "delete_file",
+            "description": "Delete one file inside the sandbox (not folders)",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "path"
+              ]
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "git_status",
+            "description": "Show git status of the sandbox",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {}
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "git_diff",
+            "description": "Show changes in the sandbox",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "staged": {
+                  "default": false,
+                  "type": "boolean"
+                }
+              }
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          },
+          {
+            "name": "git_commit",
+            "description": "Stage all changes in the sandbox and commit them",
+            "inputSchema": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              },
+              "required": [
+                "message"
+              ]
+            },
+            "execution": {
+              "taskSupport": "forbidden"
+            }
+          }
+        ]
+      }
+    },
+    "duration": 68
+  },
+  {
+    "id": "c7c75e56-8be3-49c5-902d-00fcad8f079f",
+    "timestamp": "2026-10-17T07:56:31.688Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "write_file",
+        "arguments": {
+          "path": "a.txt",
+          "content": "hi"
+        },
+        "_meta": {
+          "progressToken": 2
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 2
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Wrote 2 characters to a.txt"
+          }
+        ]
+      }
+    },
+    "duration": 29
+  },
+  {
+    "id": "14c04fbc-779a-4511-9d63-8ccdb36f4763",
+    "timestamp": "2026-10-17T07:56:43.160Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "git_status",
+        "arguments": {},
+        "_meta": {
+          "progressToken": 3
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 3
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "## No commits yet on master\n?? a.txt\n?? hello.txt\n?? notes.txt"
+          }
+        ]
+      }
+    },
+    "duration": 57
+  },
+  {
+    "id": "23f191f6-1fc7-4d07-a843-71a8d26569de",
+    "timestamp": "2026-10-17T07:56:58.375Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "git_commit",
+        "arguments": {
+          "message": "first commit"
+        },
+        "_meta": {
+          "progressToken": 4
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 4
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "[master (root-commit) 7560504] first commit\n 3 files changed, 2 insertions(+)\n create mode 100644 a.txt\n create mode 100644 hello.txt\n create mode 100644 notes.txt"
+          }
+        ]
+      }
+    },
+    "duration": 119
+  },
+  {
+    "id": "61435162-6b89-417f-8949-575807cf2182",
+    "timestamp": "2026-10-17T07:57:10.456Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "git_diff",
+        "arguments": {
+          "staged": false
+        },
+        "_meta": {
+          "progressToken": 5
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 5
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "(no output)"
+          }
+        ]
+      }
+    },
+    "duration": 46
+  }
+]
