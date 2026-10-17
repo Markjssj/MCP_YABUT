@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "npx.cmd": {
+      "type": "stdio",
+      "command": "npx.cmd",
+      "args": [
+        "tsx",
+        "src/server.ts"
+      ],
+      "cwd": "C:\\Users\\Jheno\\Desktop\\MCP"
+    }
+  }
+}
